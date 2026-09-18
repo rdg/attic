@@ -19,8 +19,10 @@ classifiers = [
 dependencies = ["pillow>=10.0"]
 
 [project.urls]
+# No Issues entry: the repo has issues, projects and the wiki turned off, so
+# advertising a tracker that redirects to the repo root would be a dead link.
 Homepage = "https://github.com/rdg/attic"
-Issues = "https://github.com/rdg/attic/issues"
+Source = "https://github.com/rdg/attic"
 
 [project.scripts]
 attic = "attic.cli:main"
