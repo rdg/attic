@@ -1,5 +1,7 @@
 # attic
 
+[![CI](https://github.com/rdg/attic/actions/workflows/ci.yml/badge.svg)](https://github.com/rdg/attic/actions/workflows/ci.yml)
+
 Make twenty years of mail attachments browsable.
 
 `attic` walks a Maildir tree, pulls out every attachment, stores each
@@ -19,7 +21,8 @@ attic serve ~/archive-attachments --label me@example.com
 ![The grid, filtered to outgoing images from one year](docs/screenshot.png)
 
 *Everything sent out in 2007 that was an image. The badges count how many
-messages carried the same file.*
+messages carried the same file. The header name and accent colour come from
+`--label`, so two mailboxes open side by side never look alike.*
 
 ## Why
 
@@ -185,7 +188,7 @@ startup.
 
 ```bash
 uv sync
-uv run pytest          # 80 tests, ~79% coverage
+uv run pytest          # 81 tests, ~79% coverage
 uv run ruff check
 uv run ruff format --check
 ```
