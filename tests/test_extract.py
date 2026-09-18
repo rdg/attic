@@ -24,9 +24,18 @@ def test_every_message_is_indexed(extracted):
 
 
 def test_tmp_directory_is_ignored(extracted):
-    """Half-written mail in tmp/ is not a message."""
-    paths = rows(extracted, "SELECT maildir_path p FROM messages")
-    assert not any("/tmp/" in r["p"] for r in paths)
+    """Half-written mail in a maildir's tmp/ is not a message.
+
+    Checks the parent directory rather than the substring "/tmp/": on Linux
+    pytest's own tmp_path lives under /tmp, so a substring test passes
+    everywhere for the wrong reason.
+    """
+    from pathlib import Path as P
+
+    paths = [r["p"] for r in rows(extracted, "SELECT maildir_path p FROM messages")]
+    assert paths, "the fixture should have indexed something"
+    assert all(P(p).parent.name in ("cur", "new") for p in paths)
+    assert not any("half-written" in p for p in paths)
 
 
 def test_identical_bytes_are_stored_once(extracted):
